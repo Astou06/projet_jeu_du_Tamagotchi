@@ -7,6 +7,10 @@ public class Tamagotchi {
     private int maxEnergie;
     private int energie;
     private String nom;
+    /*
+     * variable privés qui n'est pas dans le td et que j'ai créé
+     * moi même pour ajouter d'autres fonctions
+     */
     private int bonheur;
     private int discipline;
 
@@ -47,8 +51,10 @@ public class Tamagotchi {
         }
     }
 
-    // Methode manger(int aliment) que j'ai aussi ajouter dans le code qui donne un
-    // nombre d'energie en fonction de l'aliment choisi
+    /*
+     * Methode manger(int aliment) que j'ai aussi ajouter dans le code qui donne
+     * un nombre d'energie en fonction de l'aliment choisi
+     */
     public void manger(int aliment) {
         if (energie >= maxEnergie) {
             System.out.println(nom + ":j'ai pas faim!!");
@@ -79,17 +85,23 @@ public class Tamagotchi {
         System.out.println(nom + " mange " + nomAliment + " : Merci !");
     }
 
-    // Methode manger()
+    // Methode manger() il n'a auncun impact dans le code, ecris juste pour
+    // respecter les methodes du td
     public void manger() {
         Random random = new Random();
         manger(random.nextInt(1, 4));
     }
 
-    // Fonctions ajouter au td
-    // Methode jouer(int choix) permet aux tamagochi de pouvoir jouer avec
-    // l'utilisateur
+    /*
+     * Fonctions ajouter au td
+     * Methode jouer(int choix) permet aux tamagochi de pouvoir jouer avec
+     * l'utilisateur
+     */
     public void jouer(int choix) {
-
+        /*
+         * soit il n'a pas assez d'energie il ne joue pas, jouer prend de l'energie,
+         * soit il a un comble de bonheur donc il joue pas
+         */
         if (energie <= 1) {
             System.out.println(nom + " : je suis trop fatigué pour jouer !");
             return;
@@ -99,7 +111,12 @@ public class Tamagotchi {
             System.out.println(nom + " : je suis déjà très heureux, pas envie de jouer !");
             return;
         }
-
+        /*
+         * l'utilisateur devine un numero est s'il tombe sur le numero aleatoire il
+         * gagne et on ajoute 2 à bonheur
+         * sinon il perd et on ajoute 1 à boheur car jouer apporte du boheur. on fait
+         * attention au debordement
+         */
         Random random = new Random();
         int secret = random.nextInt(1, 4);
 
@@ -115,12 +132,19 @@ public class Tamagotchi {
         energie--;
     }
 
+    /*
+     * on le gronde en fonction du discipline si est superieur ou egal à 10
+     * on ne fais rien
+     */
     public void gronder() {
         if (discipline >= 10) {
             System.out.println(nom + " : je suis déjà sage !");
             return;
         }
-
+        /*
+         * sinion on le gronde et on ajoute à discipline la plus petite valeur entre 1
+         * et 10
+         */
         discipline = Math.min(discipline + 1, 10);
         bonheur = Math.max(bonheur - 1, 0);
         System.out.println(nom + " : d'accord, je serai sage...");
